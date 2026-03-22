@@ -1,16 +1,7 @@
 <main class="app-shell">
-  <section class="hero">
-    <div class="hero__copy">
-      <p class="eyebrow">ARC Loadout Tools</p>
-      <h1>Damage calculator for fast weapon comparisons.</h1>
-      <p class="hero__summary">
-        Compare hits-to-kill across shield profiles, inspect raw weapon output, and narrow down
-        loadouts without digging through spreadsheets.
-      </p>
-    </div>
-  </section>
+  <app-navbar/>
 
   <section class="workspace">
-    <app-gun-table />
+    <router-outlet />
   </section>
 </main>

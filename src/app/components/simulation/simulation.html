@@ -1,0 +1,129 @@
+<div class="simulation-layout">
+  <section class="panel setup-panel">
+    <div class="panel__header">
+      <div>
+        <p class="panel__eyebrow">Simulation</p>
+        <h2>Fire bullets one at a time</h2>
+        <p class="panel__description">
+          Pick a weapon, choose a shield profile, and watch the target state update shot by shot.
+        </p>
+      </div>
+      <p class="panel__badge">Manual timeline</p>
+    </div>
+
+    <div class="controls-grid">
+      <div class="control-card">
+        <label class="control-card__label" for="gun-select">Weapon</label>
+        <p class="control-card__hint">Use the live simulation to inspect bullet-by-bullet damage flow.</p>
+        <div class="select-shell">
+          <select id="gun-select" [(ngModel)]="selectedGun" (ngModelChange)="reset()">
+            <option [ngValue]="undefined" disabled>Select a weapon</option>
+            @for (gun of guns; track gun.name) {
+              <option [ngValue]="gun">{{ gun.name }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div class="control-card">
+        <label class="control-card__label">Shield profile</label>
+        <p class="control-card__hint">Swap between no shield and each armor tier without leaving the page.</p>
+        <div class="shield-toggle" role="group">
+          <button
+            type="button"
+            class="shield-toggle__button"
+            [class.shield-toggle__button--active]="isSelectedShield(undefined)"
+            (click)="selectShield(undefined)"
+          >
+            No shield
+          </button>
+          @for (shield of shields; track shield.name) {
+            <button
+              type="button"
+              class="shield-toggle__button"
+              [class.shield-toggle__button--active]="isSelectedShield(shield)"
+              (click)="selectShield(shield)"
+            >
+              {{ shield.name }}
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="action-bar">
+      <button type="button" class="btn btn--primary" (click)="fireBullet()" [disabled]="!selectedGun || isDead">
+        Fire bullet
+      </button>
+      <button type="button" class="btn btn--ghost" (click)="reset()" [disabled]="!selectedGun">
+        Reset
+      </button>
+    </div>
+  </section>
+
+  <section class="panel state-panel">
+    <div class="panel__header">
+      <div>
+        <p class="panel__eyebrow">Target State</p>
+        <h2>Live target breakdown</h2>
+      </div>
+      <p class="panel__badge">{{ selectedShield?.name ?? 'No shield' }}</p>
+    </div>
+
+    <div class="state-grid">
+      <div class="state-card">
+        <p class="state-card__label">HP</p>
+        <p class="state-card__value" [class.state-card__value--dead]="isDead">
+          {{ isDead ? 0 : hp | number:'1.1-1' }}
+        </p>
+      </div>
+      <div class="state-card">
+        <p class="state-card__label">Shield charge</p>
+        <p class="state-card__value">{{ shieldCharge | number:'1.1-1' }}</p>
+      </div>
+      <div class="state-card">
+        <p class="state-card__label">Shots fired</p>
+        <p class="state-card__value">{{ shotLog.length }}</p>
+      </div>
+    </div>
+
+    @if (isDead) {
+      <p class="dead-banner">Target eliminated in {{ shotLog.length }} shots</p>
+    }
+  </section>
+
+  @if (shotLog.length > 0) {
+    <section class="panel log-panel">
+      <div class="panel__header">
+        <div>
+          <p class="panel__eyebrow">Shot Log</p>
+          <h2>Damage timeline</h2>
+        </div>
+      </div>
+      <div class="table-shell">
+        <table>
+          <thead>
+            <tr>
+              <th>Shot</th>
+              <th>Shield depleted</th>
+              <th>HP damage</th>
+              <th>Shield after</th>
+              <th>HP after</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (entry of shotLog; track entry.shotNumber) {
+              <tr>
+                <td>{{ entry.shotNumber }}</td>
+                <td>{{ entry.shieldDamage | number:'1.1-1' }}</td>
+                <td>{{ entry.hpDamage | number:'1.1-1' }}</td>
+                <td>{{ entry.shieldAfter | number:'1.1-1' }}</td>
+                <td>{{ entry.hpAfter | number:'1.1-1' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+  }
+</div>

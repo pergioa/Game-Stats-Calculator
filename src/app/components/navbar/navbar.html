@@ -1,0 +1,25 @@
+<nav class="navbar">
+  <div class="navbar__brand">
+    <p class="navbar__eyebrow">Arc Lab</p>
+    <p class="navbar__title">Game Stats Calculator</p>
+  </div>
+
+  <div class="navbar__links" aria-label="Primary">
+    <a
+      routerLink="/"
+      routerLinkActive="navbar__link--active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="navbar__link"
+    >
+      Comparison
+    </a>
+
+    <a
+      routerLink="/simulation"
+      routerLinkActive="navbar__link--active"
+      class="navbar__link"
+    >
+      Simulation
+    </a>
+  </div>
+</nav>
