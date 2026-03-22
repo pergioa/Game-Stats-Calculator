@@ -67,7 +67,7 @@ export class Simulation {
     this.shotLog.push({shotNumber: this.shotLog.length + 1, 
       shieldDamage: shieldDamage, 
       hpDamage: hpDamage,
-      shieldAfter: isNil(this.selectedShield) ? 0: this.shieldCharge, 
+      shieldAfter: this.shieldCharge, 
       hpAfter: Math.max(0,this.hp)
       } as ShotEntry)
   }
