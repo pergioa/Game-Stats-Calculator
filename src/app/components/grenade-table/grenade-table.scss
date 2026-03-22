@@ -98,12 +98,11 @@ h3 {
   line-height: 1.6;
 }
 
-
-:host ::ng-deep .gun-selector {
+:host ::ng-deep .grenade-selector {
   width: 100%;
 }
 
-:host ::ng-deep .gun-selector .p-multiselect-label {
+:host ::ng-deep .grenade-selector .p-multiselect-label {
   display: flex;
   align-items: center;
   min-height: 3.5rem;
@@ -111,7 +110,7 @@ h3 {
   color: #dce9f7;
 }
 
-:host ::ng-deep .gun-selector.p-multiselect {
+:host ::ng-deep .grenade-selector.p-multiselect {
   width: 100%;
   border-radius: 18px;
   border: 1px solid rgba(151, 177, 208, 0.2);
@@ -119,22 +118,22 @@ h3 {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
-:host ::ng-deep .gun-selector.p-multiselect:not(.p-disabled):hover {
+:host ::ng-deep .grenade-selector.p-multiselect:not(.p-disabled):hover {
   border-color: rgba(125, 211, 252, 0.44);
 }
 
-:host ::ng-deep .gun-selector.p-multiselect.p-focus {
+:host ::ng-deep .grenade-selector.p-multiselect.p-focus {
   border-color: rgba(125, 211, 252, 0.58);
   box-shadow:
     0 0 0 1px rgba(125, 211, 252, 0.2),
     0 16px 34px rgba(2, 8, 23, 0.22);
 }
 
-:host ::ng-deep .gun-selector .p-multiselect-dropdown {
+:host ::ng-deep .grenade-selector .p-multiselect-dropdown {
   color: #8ed8fb;
 }
 
-.gun-selector__summary {
+.grenade-selector__summary {
   display: inline-flex;
   align-items: center;
   min-height: 2.1rem;
@@ -146,13 +145,13 @@ h3 {
   line-height: 1.2;
 }
 
-.gun-selector__summary--placeholder {
+.grenade-selector__summary--placeholder {
   border-color: rgba(151, 177, 208, 0.16);
   background: rgba(12, 21, 38, 0.56);
   color: #9fb2cc;
 }
 
-:host ::ng-deep .gun-selector .p-multiselect-clear-icon {
+:host ::ng-deep .grenade-selector .p-multiselect-clear-icon {
   color: #91a7c5;
 }
 

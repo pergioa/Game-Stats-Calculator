@@ -1,5 +1,3 @@
-import { Gun } from "./gun.model";
-
 export interface HitCalculatorStrategy {
-    calculate(gun: Gun):number
+    calculate(target:{damage:number}):number
 }

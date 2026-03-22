@@ -1,0 +1,21 @@
+<div class="shield-toggle" role="group" aria-label="Shield selection">
+    <button
+      type="button"
+      class="shield-toggle__button"
+      [class.shield-toggle__button--active]="isSelectedShield(undefined)"
+      (click)="selectShield(undefined)"
+    >
+      No shield
+    </button>
+
+    @for (shield of shields; track shield.name) {
+      <button
+        type="button"
+        class="shield-toggle__button"
+        [class.shield-toggle__button--active]="isSelectedShield(shield)"
+        (click)="selectShield(shield)"
+      >
+        {{ shield.name }}
+      </button>
+    }
+</div>

@@ -2,7 +2,7 @@
   <div class="panel__header">
     <div>
       <p class="panel__eyebrow">Engagement Setup</p>
-      <h2>Target and weapon selection</h2>
+      <h2>Target and grenade selection</h2>
     </div>
     <div class="panel__badge">{{ selectionCount }} selected</div>
   </div>
@@ -10,27 +10,27 @@
   <div class="controls-grid">
     <div class="control-card">
       <label class="control-card__label">Shield profile</label>
-      <p class="control-card__hint">Choose the target protection level to recalculate hits-to-kill.</p>
+      <p class="control-card__hint">Choose the target protection level to recalculate ticks-to-kill.</p>
 
-        <app-shield-selector (shieldChange)="selectShield($event)" />
+      <app-shield-selector (shieldChange)="selectShield($event)" />
     </div>
 
     <div class="control-card">
-      <label class="control-card__label" for="gun-selector">Weapons</label>
-      <p class="control-card__hint">Filter to the guns you want to compare side by side.</p>
+      <label class="control-card__label" for="grenade-selector">Grenades</label>
+      <p class="control-card__hint">Filter to the grenades you want to compare side by side.</p>
 
       <p-multiselect
-        inputId="gun-selector"
-        [options]="guns"
-        [(ngModel)]="selectedGuns"
+        inputId="grenade-selector"
+        [options]="grenades"
+        [(ngModel)]="selectedGrenades"
         optionLabel="name"
-        placeholder="Select weapons"
+        placeholder="Select grenades"
         [filter]="true"
         [showClear]="true"
-        styleClass="gun-selector"
+        styleClass="grenade-selector"
       >
         <ng-template #selecteditems>
-          <span class="gun-selector__summary" [class.gun-selector__summary--placeholder]="selectionCount === 0">
+          <span class="grenade-selector__summary" [class.grenade-selector__summary--placeholder]="selectionCount === 0">
             {{ selectionSummary }}
           </span>
         </ng-template>
@@ -43,7 +43,7 @@
   <div class="panel__header">
     <div>
       <p class="panel__eyebrow">Results</p>
-      <h2>Weapon breakdown</h2>
+      <h2>Grenade breakdown</h2>
     </div>
     <div class="results-summary">
       <span class="results-summary__label">Target</span>
@@ -53,30 +53,30 @@
 
   @if (selectionCount === 0) {
     <div class="empty-state">
-      <h3>No weapons selected</h3>
-      <p>Pick one or more weapons above to generate a side-by-side comparison table.</p>
+      <h3>No grenades selected</h3>
+      <p>Pick one or more grenades above to generate a side-by-side comparison table.</p>
     </div>
   } @else {
     <div class="table-shell">
       <table>
         <thead>
           <tr>
-            <th>Weapon</th>
+            <th>Grenade</th>
+            <th>Type</th>
             <th>Damage</th>
-            <th>Fire rate</th>
-            <th>Relative DPS</th>
-            <th>Hits to kill</th>
+            <th>Radius</th>
+            <th>Ticks to kill</th>
           </tr>
         </thead>
         <tbody>
-          @for (gun of sortedSelectedGuns; track gun.name) {
+          @for (grenade of selectedGrenades; track grenade.name) {
             <tr>
-              <td class="weapon-name">{{ gun.name }}</td>
-              <td>{{ gun.damage }}</td>
-              <td>{{ formatFireRate(gun.fireRate) }}</td>
-              <td>{{ gun.relativeDps }}</td>
+              <td class="weapon-name">{{ grenade.name }}</td>
+              <td>{{ grenade.type }}</td>
+              <td>{{ grenade.damage }}</td>
+              <td>{{ grenade.radius }}m</td>
               <td>
-                <span class="kill-badge">{{ getHitsToKill(gun) }}</span>
+                <span class="kill-badge">{{ getHitsToKill(grenade) }}</span>
               </td>
             </tr>
           }
