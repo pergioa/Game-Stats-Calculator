@@ -1,0 +1,68 @@
+:host {
+  display: block;
+}
+
+.app-shell {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 3rem 0 4rem;
+}
+
+.hero {
+  margin-bottom: 2rem;
+}
+
+.hero__copy {
+  border: 1px solid rgba(151, 177, 208, 0.18);
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(10, 17, 31, 0.84)),
+    rgba(8, 15, 30, 0.72);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 26px 80px rgba(3, 10, 25, 0.32);
+}
+
+.hero__copy {
+  border-radius: 28px;
+  padding: 2rem;
+}
+
+.eyebrow {
+  margin: 0 0 1rem;
+  color: #7dd3fc;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  color: #f8fbff;
+  font-size: clamp(2.3rem, 4vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+
+.hero__summary {
+  max-width: 62ch;
+  margin: 1.25rem 0 0;
+  color: #b8c7dd;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    width: min(100% - 1rem, 1180px);
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+
+  .hero__copy,
+  .hero__copy {
+    border-radius: 22px;
+    padding: 1.25rem;
+  }
+}

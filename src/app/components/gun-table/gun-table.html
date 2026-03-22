@@ -1,0 +1,107 @@
+<section class="panel controls-panel">
+  <div class="panel__header">
+    <div>
+      <p class="panel__eyebrow">Engagement Setup</p>
+      <h2>Target and weapon selection</h2>
+    </div>
+    <div class="panel__badge">{{ selectionCount }} selected</div>
+  </div>
+
+  <div class="controls-grid">
+    <div class="control-card">
+      <label class="control-card__label">Shield profile</label>
+      <p class="control-card__hint">Choose the target protection level to recalculate hits-to-kill.</p>
+
+      <div class="shield-toggle" role="group" aria-label="Shield selection">
+        <button
+          type="button"
+          class="shield-toggle__button"
+          [class.shield-toggle__button--active]="isSelectedShield(undefined)"
+          (click)="selectShield(undefined)"
+        >
+          No shield
+        </button>
+
+        @for (shield of shields; track shield.name) {
+          <button
+            type="button"
+            class="shield-toggle__button"
+            [class.shield-toggle__button--active]="isSelectedShield(shield)"
+            (click)="selectShield(shield)"
+          >
+            {{ shield.name }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="control-card">
+      <label class="control-card__label" for="gun-selector">Weapons</label>
+      <p class="control-card__hint">Filter to the guns you want to compare side by side.</p>
+
+      <p-multiselect
+        inputId="gun-selector"
+        [options]="guns"
+        [(ngModel)]="selectedGuns"
+        optionLabel="name"
+        placeholder="Select weapons"
+        [filter]="true"
+        [showClear]="true"
+        styleClass="gun-selector"
+      >
+        <ng-template #selecteditems>
+          <span class="gun-selector__summary" [class.gun-selector__summary--placeholder]="selectionCount === 0">
+            {{ selectionSummary }}
+          </span>
+        </ng-template>
+      </p-multiselect>
+    </div>
+  </div>
+</section>
+
+<section class="panel results-panel">
+  <div class="panel__header">
+    <div>
+      <p class="panel__eyebrow">Results</p>
+      <h2>Weapon breakdown</h2>
+    </div>
+    <div class="results-summary">
+      <span class="results-summary__label">Target</span>
+      <strong>{{ selectedShieldLabel }}</strong>
+    </div>
+  </div>
+
+  @if (selectionCount === 0) {
+    <div class="empty-state">
+      <h3>No weapons selected</h3>
+      <p>Pick one or more weapons above to generate a side-by-side comparison table.</p>
+    </div>
+  } @else {
+    <div class="table-shell">
+      <table>
+        <thead>
+          <tr>
+            <th>Weapon</th>
+            <th>Damage</th>
+            <th>Fire rate</th>
+            <th>Relative DPS</th>
+            <th>Hits to kill</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (gun of sortedSelectedGuns; track gun.name) {
+            <tr>
+              <td class="weapon-name">{{ gun.name }}</td>
+              <td>{{ gun.damage }}</td>
+              <td>{{ formatFireRate(gun.fireRate) }}</td>
+              <td>{{ gun.relativeDps }}</td>
+              <td>
+                <span class="kill-badge">{{ getHitsToKill(gun) }}</span>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>
