@@ -57,7 +57,7 @@ export class Simulation {
     if (!isNil(this.selectedShield) && this.shieldCharge > 0) {
       hpDamage = this.selectedGun.damage * (1 - this.selectedShield.mitigation);
       shieldDamage = this.selectedGun.damage
-      this.shieldCharge -= shieldDamage;
+      this.shieldCharge = this.shieldCharge - shieldDamage < 0 ? 0: this.shieldCharge - shieldDamage;
     }
 
     this.hp -= hpDamage;
