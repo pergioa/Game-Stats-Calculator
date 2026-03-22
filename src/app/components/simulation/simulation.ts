@@ -50,17 +50,6 @@ export class Simulation {
   }
 
   protected fireBullet(): void {
-    // TODO(human): implement bullet fire logic
-    // Available state: this.selectedGun, this.selectedShield, this.hp, this.shieldCharge
-    // Steps:
-    //   1. Guard: return early if no gun selected or target is already dead
-    //   2. Calculate shieldDamage and hpDamage based on whether shieldCharge > 0
-    //      - If shield active: hpDamage = gun.damage * (1 - shield.mitigation), shieldCharge depletes by gun.damage
-    //      - If no shield: hpDamage = gun.damage, shieldDamage = 0
-    //   3. Update this.hp and this.shieldCharge (clamp shieldCharge to 0 minimum)
-    //   4. Push a ShotEntry to this.shotLog
-    //   5. Set this.isDead = true if hp <= 0
-
     if(isNil(this.selectedGun) || this.isDead) return;
 
     let hpDamage = this.selectedGun.damage;
