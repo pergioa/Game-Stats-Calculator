@@ -36,6 +36,7 @@
         placeholder="Select weapons"
         [filter]="true"
         [showClear]="true"
+        (onClear)="clearSelectedGuns()"
         styleClass="gun-selector"
       >
         <ng-template #selecteditems>

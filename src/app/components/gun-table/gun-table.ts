@@ -51,6 +51,10 @@ export class GunTable {
     this.bodyPart = selection as BodyPart;
   }
 
+  protected clearSelectedGuns(): void {
+    this.selectedGuns = [];
+  }
+
   protected get sortedSelectedGuns(): Gun[] {
     return [...this.selectedGuns].sort((left, right) => {
       const hitDifference = this.getHitsToKill(left) - this.getHitsToKill(right);

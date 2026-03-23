@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Grenade } from '../models/grenade.model';
 import { Observable } from 'rxjs';
+import { Shield } from '../models/shield.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GrenadeService {
+export class ShieldService {
   protected http = inject(HttpClient);
 
-  public getGrenades(): Observable<Grenade[]>{
-    return this.http.get<Grenade[]>('http://localhost:5187/api/grenades')
+  public getShields(): Observable<Shield[]>{
+    return this.http.get<Shield[]>('http://localhost:5187/api/shields')
   }
 }

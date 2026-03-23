@@ -9,7 +9,7 @@
       No shield
     </button>
 
-    @for (shield of shields; track shield.name) {
+    @for (shield of (shields$ | async) ?? []; track shield.name) {
       <button
         type="button"
         class="shield-toggle__button"

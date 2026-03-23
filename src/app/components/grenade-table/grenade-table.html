@@ -27,6 +27,7 @@
         placeholder="Select grenades"
         [filter]="true"
         [showClear]="true"
+        (onClear)="clearSelectedGrenades()"
         styleClass="grenade-selector"
       >
         <ng-template #selecteditems>

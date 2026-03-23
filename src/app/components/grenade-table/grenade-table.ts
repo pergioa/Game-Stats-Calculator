@@ -46,6 +46,10 @@ export class GrenadeTable {
     return this.damageCalc.hitsToKill(grenade, this.shield);
   }
 
+  protected clearSelectedGrenades(): void {
+    this.selectedGrenades = [];
+  }
+
   protected selectShield(selection: Shield | undefined) {
     this.shield = selection;
   }

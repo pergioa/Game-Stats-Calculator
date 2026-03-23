@@ -106,7 +106,7 @@ h3 {
   display: flex;
   align-items: center;
   min-height: 3.5rem;
-  padding: 0.45rem 0.55rem;
+  padding: 0.45rem 2.5rem 0.45rem 0.55rem;
   color: #dce9f7;
 }
 
@@ -143,6 +143,7 @@ h3 {
   background: rgba(20, 53, 83, 0.45);
   color: #dff4ff;
   line-height: 1.2;
+  pointer-events: none;
 }
 
 .grenade-selector__summary--placeholder {

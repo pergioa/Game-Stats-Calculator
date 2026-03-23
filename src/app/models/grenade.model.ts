@@ -1,5 +1,5 @@
 export interface FragGrenade{
-    type: 'frag',
+    type: 'Frag',
     name: string,
     damage: number,
     radius: number,
@@ -7,7 +7,7 @@ export interface FragGrenade{
 }
 
 export interface FireGrenade{
-    type: 'fire',
+    type: 'Fire',
     name: string,
     damage: number,
     radius: number,
@@ -15,7 +15,7 @@ export interface FireGrenade{
 }
 
 export interface TriggerGrenade{
-    type: 'trigger',
+    type: 'Trigger',
     name: string,
     damage: number,
     radius: number,

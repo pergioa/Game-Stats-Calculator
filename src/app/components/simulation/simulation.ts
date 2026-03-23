@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { GUNS } from '../../data/guns.data';
-import { SHIELDS } from '../../data/shields.data';
+import { Component, inject } from '@angular/core';
 import { Gun } from '../../models/gun.model';
 import { Shield } from '../../models/shield.model';
+import { GunService } from '../../services/gun-service';
 import { isNil } from 'es-toolkit/predicate';
 import { FormsModule } from '@angular/forms';
-import { DecimalPipe } from '@angular/common';
+import { AsyncPipe, DecimalPipe } from '@angular/common';
+import { ShieldSelector } from '../shield-selector/shield-selector';
 import {
   BodyPart,
   DamageMultiplierSelector,
@@ -22,13 +22,13 @@ interface ShotEntry {
 
 @Component({
   selector: 'app-simulation',
-  imports: [FormsModule, DecimalPipe, DamageMultiplierSelector],
+  imports: [FormsModule, DecimalPipe, AsyncPipe, ShieldSelector, DamageMultiplierSelector],
   templateUrl: './simulation.html',
   styleUrl: './simulation.scss',
 })
 export class Simulation {
-  protected guns = GUNS;
-  protected shields = SHIELDS;
+  private gunService = inject(GunService);
+  protected guns$ = this.gunService.getGuns();
   protected selectedGun: Gun | undefined = undefined;
   protected selectedShield: Shield | undefined = undefined;
   protected bodyPart: BodyPart = 'body';
@@ -45,10 +45,6 @@ export class Simulation {
   protected selectBodyPart(selection: BodyPart): void {
     this.bodyPart = selection;
     this.reset();
-  }
-
-  protected isSelectedShield(selection: Shield | undefined): boolean {
-    return this.selectedShield?.name === selection?.name || (!this.selectedShield && !selection);
   }
 
   protected reset(): void {

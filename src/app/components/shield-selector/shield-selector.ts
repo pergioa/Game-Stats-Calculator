@@ -1,15 +1,17 @@
-import { Component, output } from '@angular/core';
-import { SHIELDS } from '../../data/shields.data';
+import { Component, inject, output } from '@angular/core';
 import { Shield } from '../../models/shield.model';
+import { ShieldService } from '../../services/shield-service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-shield-selector',
-  imports: [],
+  imports: [AsyncPipe],
   templateUrl: './shield-selector.html',
   styleUrl: './shield-selector.scss',
 })
 export class ShieldSelector {
-  protected shields = SHIELDS;
+  private shieldService = inject(ShieldService);
+  protected shields$ = this.shieldService.getShields();
   protected shield: Shield | undefined = undefined;
   protected shieldChange = output<Shield | undefined>();
 

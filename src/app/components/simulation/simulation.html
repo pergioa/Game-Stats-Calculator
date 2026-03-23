@@ -18,7 +18,7 @@
         <div class="select-shell">
           <select id="gun-select" [(ngModel)]="selectedGun" (ngModelChange)="reset()">
             <option [ngValue]="undefined" disabled>Select a weapon</option>
-            @for (gun of guns; track gun.name) {
+            @for (gun of (guns$ | async) ?? []; track gun.name) {
               <option [ngValue]="gun">{{ gun.name }}</option>
             }
           </select>
@@ -31,26 +31,7 @@
         <div class="selector-stack">
           <div class="selector-group">
             <p class="selector-group__label">Shield</p>
-            <div class="shield-toggle" role="group">
-              <button
-                type="button"
-                class="shield-toggle__button"
-                [class.shield-toggle__button--active]="isSelectedShield(undefined)"
-                (click)="selectShield(undefined)"
-              >
-                No shield
-              </button>
-              @for (shield of shields; track shield.name) {
-                <button
-                  type="button"
-                  class="shield-toggle__button"
-                  [class.shield-toggle__button--active]="isSelectedShield(shield)"
-                  (click)="selectShield(shield)"
-                >
-                  {{ shield.name }}
-                </button>
-              }
-            </div>
+            <app-shield-selector (shieldChange)="selectShield($event)" />
           </div>
 
           <div class="selector-group">
