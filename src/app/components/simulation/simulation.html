@@ -28,25 +28,35 @@
       <div class="control-card">
         <label class="control-card__label">Shield profile</label>
         <p class="control-card__hint">Swap between no shield and each armor tier without leaving the page.</p>
-        <div class="shield-toggle" role="group">
-          <button
-            type="button"
-            class="shield-toggle__button"
-            [class.shield-toggle__button--active]="isSelectedShield(undefined)"
-            (click)="selectShield(undefined)"
-          >
-            No shield
-          </button>
-          @for (shield of shields; track shield.name) {
-            <button
-              type="button"
-              class="shield-toggle__button"
-              [class.shield-toggle__button--active]="isSelectedShield(shield)"
-              (click)="selectShield(shield)"
-            >
-              {{ shield.name }}
-            </button>
-          }
+        <div class="selector-stack">
+          <div class="selector-group">
+            <p class="selector-group__label">Shield</p>
+            <div class="shield-toggle" role="group">
+              <button
+                type="button"
+                class="shield-toggle__button"
+                [class.shield-toggle__button--active]="isSelectedShield(undefined)"
+                (click)="selectShield(undefined)"
+              >
+                No shield
+              </button>
+              @for (shield of shields; track shield.name) {
+                <button
+                  type="button"
+                  class="shield-toggle__button"
+                  [class.shield-toggle__button--active]="isSelectedShield(shield)"
+                  (click)="selectShield(shield)"
+                >
+                  {{ shield.name }}
+                </button>
+              }
+            </div>
+          </div>
+
+          <div class="selector-group">
+            <p class="selector-group__label">Damage multiplier</p>
+            <app-damage-multiplier-selector (bodyPartChange)="selectBodyPart($event)" />
+          </div>
         </div>
       </div>
     </div>
@@ -107,6 +117,7 @@
               <th>Shot</th>
               <th>Shield depleted</th>
               <th>HP damage</th>
+              <th>Multiplier</th>
               <th>Shield after</th>
               <th>HP after</th>
             </tr>
@@ -117,6 +128,7 @@
                 <td>{{ entry.shotNumber }}</td>
                 <td>{{ entry.shieldDamage | number:'1.1-1' }}</td>
                 <td>{{ entry.hpDamage | number:'1.1-1' }}</td>
+                <td>{{ entry.damageMultiplier | number:'1.1-2' }}</td>
                 <td>{{ entry.shieldAfter | number:'1.1-1' }}</td>
                 <td>{{ entry.hpAfter | number:'1.1-1' }}</td>
               </tr>

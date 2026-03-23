@@ -5,7 +5,7 @@ export class ShieldedCalculator implements HitCalculatorStrategy {
     
     constructor(private shield: Shield){}
     
-    public calculate(target: {damage:number} ): number {
+    public calculate(target: {damage:number}, multiplier:number ): number {
         let hits = 0;
         let hp = 100;
         let shieldCharge = this.shield.totalCharge;
@@ -17,7 +17,7 @@ export class ShieldedCalculator implements HitCalculatorStrategy {
                 shieldCharge -= target.damage;
             }
 
-            hp -= hitDamage;
+            hp -= hitDamage * multiplier;
             hits++;
         }
         return hits;

@@ -6,10 +6,11 @@ import { Shield } from '../../models/shield.model';
 import { MultiSelect } from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
 import { ShieldSelector } from '../shield-selector/shield-selector';
+import { BodyPart, DamageMultiplierSelector } from "../damage-multiplier-selector/damage-multiplier-selector";
 
 @Component({
   selector: 'app-gun-table',
-  imports: [MultiSelect, FormsModule,ShieldSelector],
+  imports: [MultiSelect, FormsModule, ShieldSelector, DamageMultiplierSelector],
   templateUrl: './gun-table.html',
   styleUrl: './gun-table.scss',
 })
@@ -17,7 +18,7 @@ export class GunTable {
   private damageCalc = inject(DamageCalc);
   protected guns = GUNS;
   protected shield: Shield | undefined;
-
+  protected bodyPart: BodyPart  = 'body';
   protected selectedGuns: Gun[] = [];
 
   protected get selectedShieldLabel(): string {
@@ -40,8 +41,12 @@ export class GunTable {
     return `${this.selectionCount} weapons selected`;
   }
 
-    protected selectShield(selection: Shield | undefined) {
+  protected selectShield(selection: Shield | undefined) {
     this.shield = selection;
+  }
+
+  protected selectBodyPart(selection: string | undefined){
+    this.bodyPart = selection as BodyPart;
   }
 
   protected get sortedSelectedGuns(): Gun[] {
@@ -57,7 +62,23 @@ export class GunTable {
   }
 
   protected getHitsToKill(gun: Gun) {
-    return this.damageCalc.hitsToKill(gun, this.shield);
+    let damageMultiplier = 1;
+
+    switch (this.bodyPart) {
+      case 'head':
+        damageMultiplier = gun.headshotMultiplier
+        break;
+      
+      case 'leg':
+        damageMultiplier = gun.limbMultiplier
+        break;
+    
+      default:
+        damageMultiplier = 1
+        break;
+    }
+
+    return this.damageCalc.hitsToKill(gun, damageMultiplier ,this.shield);
   }
 
   protected formatFireRate(fireRate: number): string {

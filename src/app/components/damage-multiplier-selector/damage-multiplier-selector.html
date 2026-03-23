@@ -1,0 +1,13 @@
+<div class="zone-toggle" role="group" aria-label="Damage zone selection">
+  @for (bodyPart of bodyParts; track bodyPart) {
+    <button
+      type="button"
+      class="zone-toggle__button"
+      [class.zone-toggle__button--active]="isSelectedBodyPart(bodyPart)"
+      [attr.aria-pressed]="isSelectedBodyPart(bodyPart)"
+      (click)="selectBodyPart(bodyPart)"
+    >
+      {{ bodyPart === 'leg' ? 'Leg' : bodyPart.charAt(0).toUpperCase() + bodyPart.slice(1) }}
+    </button>
+  }
+</div>

@@ -98,6 +98,25 @@ h3 {
   line-height: 1.6;
 }
 
+.selector-stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.selector-group {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.selector-group__label {
+  margin: 0;
+  color: #cfe2f5;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 
 :host ::ng-deep .gun-selector {
   width: 100%;

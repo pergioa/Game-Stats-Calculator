@@ -11,10 +11,10 @@ import { ShieldedCalculator } from './strategies/shielded-calculator';
 export class DamageCalc {
   
 
-  public hitsToKill(gun: Gun, shield?:Shield): number{
+  public hitsToKill(gun: Gun, multiplier: number,shield?:Shield ): number{
     const strategy  = isNil(shield) ? new NoShieldCalculator() : new ShieldedCalculator(shield as Shield);
 
-    return strategy.calculate(gun);
+    return strategy.calculate(gun, multiplier);
   }
 }
 

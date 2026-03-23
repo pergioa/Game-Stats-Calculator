@@ -1,3 +1,3 @@
 export interface HitCalculatorStrategy {
-    calculate(target:{damage:number}):number
+    calculate(target:{damage:number}, multiplier: number):number
 }

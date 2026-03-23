@@ -11,8 +11,17 @@
     <div class="control-card">
       <label class="control-card__label">Shield profile</label>
       <p class="control-card__hint">Choose the target protection level to recalculate hits-to-kill.</p>
+      <div class="selector-stack">
+        <div class="selector-group">
+          <p class="selector-group__label">Shield</p>
+          <app-shield-selector (shieldChange)="selectShield($event)" />
+        </div>
 
-        <app-shield-selector (shieldChange)="selectShield($event)" />
+        <div class="selector-group">
+          <p class="selector-group__label">Damage multiplier</p>
+          <app-damage-multiplier-selector (bodyPartChange)="selectBodyPart($event)" />
+        </div>
+      </div>
     </div>
 
     <div class="control-card">
@@ -65,6 +74,7 @@
             <th>Damage</th>
             <th>Fire rate</th>
             <th>Relative DPS</th>
+            <th>Damage multiplier</th>
             <th>Hits to kill</th>
           </tr>
         </thead>
@@ -75,6 +85,17 @@
               <td>{{ gun.damage }}</td>
               <td>{{ formatFireRate(gun.fireRate) }}</td>
               <td>{{ gun.relativeDps }}</td>
+              @switch (this.bodyPart) {
+                @case ('head') {
+                  <td>{{ gun.headshotMultiplier }}</td>
+                }
+                @case ('leg') {
+                  <td>{{ gun.limbMultiplier }}</td>
+                }
+                @default {
+                  <td>{{ 1 }}</td>
+                }
+              }
               <td>
                 <span class="kill-badge">{{ getHitsToKill(gun) }}</span>
               </td>

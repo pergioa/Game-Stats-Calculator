@@ -3,4 +3,6 @@ export interface Gun {
     damage : number;
     fireRate : number;
     relativeDps :number;
+    headshotMultiplier: number;
+    limbMultiplier: number;
 }

@@ -12,6 +12,6 @@ export class GrenadeDamageCalc {
   public hitsToKill(grenade: Grenade, shield?:Shield): number{
     const strategy  = isNil(shield) ? new NoShieldCalculator() : new ShieldedCalculator(shield as Shield);
 
-    return strategy.calculate(grenade);
+    return strategy.calculate(grenade, 1);
   }
 }
