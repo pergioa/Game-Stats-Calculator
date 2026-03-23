@@ -1,3 +1,4 @@
+using ArcDamageCalculator.Api.Dtos;
 using ArcDamageCalculator.Api.Models;
 using ArcDamageCalculator.Api.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,6 @@ public class ShieldsController(IShieldRepository repository) : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<Shield>> GetAll()
     {
-        return Ok(_shieldRepository.GetAll());
+        return Ok(_shieldRepository.GetAll().Select(ShieldDto.FormShield));
     }
 }

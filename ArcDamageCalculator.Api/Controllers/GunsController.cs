@@ -1,3 +1,4 @@
+using ArcDamageCalculator.Api.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using ArcDamageCalculator.Api.Models;
 using ArcDamageCalculator.Api.Repositories;
@@ -14,6 +15,6 @@ public class GunsController(IGunRepository repository) : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<Gun>> GetAll()
     {
-        return Ok(_gunRepository.GetAll());
+        return Ok(_gunRepository.GetAll().Select(GunDto.FromGun));
     }
 }

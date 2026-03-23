@@ -1,3 +1,4 @@
+using ArcDamageCalculator.Api.Dtos;
 using ArcDamageCalculator.Api.Models;
 using ArcDamageCalculator.Api.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,6 @@ public class GrenadesController(IGrenadeRepository repository) : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<Grenade>> Get()
     {
-        return Ok(_grenadeRepository.GetAll());
+        return Ok(_grenadeRepository.GetAll().Select(GrenadeDto.FormGrenade));
     }
 }
