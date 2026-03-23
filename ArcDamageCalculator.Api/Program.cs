@@ -22,7 +22,7 @@ builder.Services.AddCors(fileOptions =>
     });
 });
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=arcdamage.db"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -31,6 +31,11 @@ builder.Services.AddScoped<IGrenadeRepository, GrenadeRepository>();
 builder.Services.AddScoped<IShieldRepository, ShieldRepository>();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    scope.ServiceProvider.GetRequiredService<AppDbContext>().Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

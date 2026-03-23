@@ -22,6 +22,9 @@ ArcDamageCalculator.Api/arcdamage.db-wal
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# Environment
+.env
+
 # System
 .DS_Store
 Thumbs.db
