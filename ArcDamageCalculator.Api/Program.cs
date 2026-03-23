@@ -38,30 +38,6 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-using var scope = app.Services.CreateScope();
-var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-
-if (!context.Guns.Any())
-{
-    var gunRepo = scope.ServiceProvider.GetRequiredService<IGunRepository>();
-    context.Guns.AddRange(gunRepo.GetAll());
-    context.SaveChanges();
-}
-
-if (!context.Grenades.Any())
-{
-    var grenadeRepo = scope.ServiceProvider.GetRequiredService<IGrenadeRepository>();
-    context.Grenades.AddRange(grenadeRepo.GetAll());
-    context.SaveChanges();
-}
-
-if (!context.Shields.Any())
-{
-    var shieldRepo = scope.ServiceProvider.GetRequiredService<IShieldRepository>();
-    context.Shields.AddRange(shieldRepo.GetAll());
-    context.SaveChanges();
-}
-
 app.UseHttpsRedirection();
 app.UseCors("AllowAngularDev");
 
