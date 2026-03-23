@@ -1,44 +1,27 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# Angular
+arc-damage-calculator/dist
+arc-damage-calculator/tmp
+arc-damage-calculator/out-tsc
+arc-damage-calculator/bazel-out
+arc-damage-calculator/node_modules
+arc-damage-calculator/.angular/cache
+arc-damage-calculator/coverage
 
-# Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+# .NET
+ArcDamageCalculator.Api/bin
+ArcDamageCalculator.Api/obj
+ArcDamageCalculator.Api/arcdamage.db
+ArcDamageCalculator.Api/arcdamage.db-shm
+ArcDamageCalculator.Api/arcdamage.db-wal
 
-# Node
-/node_modules
-npm-debug.log
-yarn-error.log
-
-# IDEs and editors
+# IDEs
 .idea/
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
-
-# Visual Studio Code
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-!.vscode/mcp.json
-.history/*
 
-# Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-__screenshots__/
-
-# System files
+# System
 .DS_Store
 Thumbs.db
