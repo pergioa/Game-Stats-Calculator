@@ -21,7 +21,7 @@
 
       <p-multiselect
         inputId="grenade-selector"
-        [options]="grenades"
+        [options]="(grenades$ | async) ?? []"
         [(ngModel)]="selectedGrenades"
         optionLabel="name"
         placeholder="Select grenades"

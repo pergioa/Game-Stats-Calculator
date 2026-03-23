@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { DamageCalc } from '../../services/damage-calc';
-import { GUNS } from '../../data/guns.data';
+import { GunService } from "../../services/gun-service";
+import { AsyncPipe } from "@angular/common";
 import { Gun } from '../../models/gun.model';
 import { Shield } from '../../models/shield.model';
 import { MultiSelect } from 'primeng/multiselect';
@@ -10,13 +11,14 @@ import { BodyPart, DamageMultiplierSelector } from "../damage-multiplier-selecto
 
 @Component({
   selector: 'app-gun-table',
-  imports: [MultiSelect, FormsModule, ShieldSelector, DamageMultiplierSelector],
+  imports: [MultiSelect, FormsModule, ShieldSelector, DamageMultiplierSelector, AsyncPipe],
   templateUrl: './gun-table.html',
   styleUrl: './gun-table.scss',
 })
 export class GunTable {
   private damageCalc = inject(DamageCalc);
-  protected guns = GUNS;
+  private gunService = inject(GunService)
+  protected guns$ = this.gunService.getGuns();
   protected shield: Shield | undefined;
   protected bodyPart: BodyPart  = 'body';
   protected selectedGuns: Gun[] = [];
@@ -34,7 +36,7 @@ export class GunTable {
       return 'Select weapons';
     }
 
-    if (this.selectionCount === this.guns.length) {
+    if (this.selectionCount === 0) {
       return 'All weapons selected';
     }
 

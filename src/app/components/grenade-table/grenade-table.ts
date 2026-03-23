@@ -1,21 +1,23 @@
 import { Component, inject } from '@angular/core';
 import { Shield } from '../../models/shield.model';
 import { Grenade } from '../../models/grenade.model';
-import { GRENADES } from '../../data/grenades.data';
 import { GrenadeDamageCalc } from '../../services/grenade-damage-calc';
 import { ShieldSelector } from '../shield-selector/shield-selector';
 import { MultiSelect } from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
+import { AsyncPipe } from '@angular/common';
+import { GrenadeService } from '../../services/grenade-service';
 
 @Component({
   selector: 'app-grenade-table',
-  imports: [ShieldSelector,FormsModule, MultiSelect],
+  imports: [ShieldSelector,FormsModule, MultiSelect, AsyncPipe],
   templateUrl: './grenade-table.html',
   styleUrl: './grenade-table.scss',
 })
 export class GrenadeTable {
   private damageCalc = inject(GrenadeDamageCalc);
-  protected grenades = GRENADES;
+  private grandeService = inject(GrenadeService);
+  protected grenades$ = this.grandeService.getGrenades();
 
   protected selectedGrenades: Grenade[] = [];
   protected shield: Shield | undefined = undefined;
@@ -33,7 +35,7 @@ export class GrenadeTable {
       return 'Select grenades';
     }
 
-    if (this.selectionCount === this.grenades.length) {
+    if (this.selectionCount === 0) {
       return 'All grenades selected';
     }
 

@@ -30,7 +30,7 @@
 
       <p-multiselect
         inputId="gun-selector"
-        [options]="guns"
+        [options]="(guns$ | async) ?? []"
         [(ngModel)]="selectedGuns"
         optionLabel="name"
         placeholder="Select weapons"
