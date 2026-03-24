@@ -40,7 +40,9 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             new Grenade(2, GrenadeType.Frag, "Heavy Fuze", 80.0, 7.5, 3.0, null),
             new Grenade(3, GrenadeType.Frag, "Snap Blast", 70.0, 7.5, 3.0, null),
             new Grenade(4, GrenadeType.Fire, "Blaze", 5.0, 10.0, null, 10.0),
-            new Grenade(5, GrenadeType.Trigger, "Trigger 'Nade", 90.0, 7.5, 1.5, null)
+            new Grenade(5, GrenadeType.Trigger, "Trigger 'Nade", 90.0, 7.5, 1.5, null),
+            new Grenade(6, GrenadeType.Frag, "Shrapnel Grenade", 60, 6.0, 3.0, null),
+            new Grenade(7, GrenadeType.Trigger, "Trailblazer", 20, 2.0, 1.5, null)
         );
 
         modelBuilder.Entity<Shield>().HasData(
