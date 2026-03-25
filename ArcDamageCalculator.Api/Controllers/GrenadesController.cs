@@ -16,4 +16,28 @@ public class GrenadesController(IGrenadeRepository repository) : ControllerBase
     {
         return Ok(_grenadeRepository.GetAll().Select(GrenadeDto.FormGrenade));
     }
+
+    [HttpPost]
+    public ActionResult<Grenade> Post(Grenade grenade)
+    {
+        var result = _grenadeRepository.Add(grenade);
+        
+        return CreatedAtAction(nameof(Get), result);
+    }
+    
+    [HttpPut("{id}")]
+    public ActionResult<Grenade> Put(int id, [FromBody] Grenade grenade)
+    {
+        var result = _grenadeRepository.Update(id, grenade);
+        if(result is null) return NotFound();
+        
+        return Ok(result);
+    }
+    
+    [HttpDelete("{id}")]
+    public ActionResult Delete(int id)
+    {
+        if (!_grenadeRepository.Delete(id)) return NotFound();
+        return NoContent();
+    }
 }
