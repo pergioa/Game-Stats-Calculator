@@ -1,0 +1,16 @@
+{
+  "dotnetAcquisitionExtension.existingDotnetPath": [
+    {
+      "extensionId": "ms-dotnettools.csharp",
+      "path": "/opt/homebrew/bin/dotnet"
+    },
+    {
+      "extensionId": "ms-dotnettools.csdevkit",
+      "path": "/opt/homebrew/bin/dotnet"
+    }
+  ],
+  "terminal.integrated.env.osx": {
+    "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "DOTNET_ROOT": "/opt/homebrew/Cellar/dotnet/10.0.105/libexec"
+  }
+}
