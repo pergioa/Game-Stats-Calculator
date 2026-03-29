@@ -43,8 +43,9 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
 app.UseCors("AllowAngularDev");
+app.UseHttpsRedirection();
+
 
 app.UseAuthorization();
 
